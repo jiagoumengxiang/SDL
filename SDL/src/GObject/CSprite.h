@@ -14,9 +14,13 @@
 namespace std {
 
 class CSprite: public I_Logic, public I_View {
+
 public:
 	CSprite();
 	virtual ~CSprite();
+	void Logic();
+	void Draw(SDL_Surface* _screen);
+
 };
 
 } /* namespace std */

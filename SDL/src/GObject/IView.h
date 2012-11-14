@@ -7,10 +7,11 @@
 
 #ifndef IVIEW_H_
 #define IVIEW_H_
+#include "SDL/SDL.h"
 
 namespace std {
 
-class I_View {
+class  I_View {
 public:
 	virtual void Draw(SDL_Surface* _screen)=0;
 };

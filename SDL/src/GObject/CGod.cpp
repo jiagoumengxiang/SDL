@@ -8,14 +8,14 @@
 #include "CGod.h"
 
 namespace std {
-
 CGod::CGod() {
-	// TODO Auto-generated constructor stub
-
 }
 
 CGod::~CGod() {
-	// TODO Auto-generated destructor stub
+}
+
+void CGod::Logic(){
+
 }
 
 } /* namespace std */

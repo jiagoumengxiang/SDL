@@ -12,10 +12,12 @@
 
 namespace std {
 
-class CGod:ILogic {
+class CGod : public I_Logic{
+
 public:
 	CGod();
 	virtual ~CGod();
+	void Logic();
 };
 
 } /* namespace std */

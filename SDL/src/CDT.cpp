@@ -4,11 +4,16 @@
 #include "SDL/SDL.h"
 
 int main(int argc, char* argv[]) {
-	//Start SDL
-	SDL_Init(SDL_INIT_EVERYTHING);
+	try {
+		if (SDL_Init(SDL_INIT_VIDEO == -1))
+			throw SDL_GetError();
+	} catch (const char* s) {
+		std::cerr << s << std::endl;
+		return -1;
+	}
 
 	//Set up screen
-	SDL_Surface* screen = SDL_SetVideoMode(640, 480, 32, SDL_SWSURFACE);
+	SDL_SetVideoMode(1200, 800, 32, SDL_SWSURFACE);
 	bool GAMESTATUS = true;
 
 	int time1, time2;
@@ -44,6 +49,7 @@ int main(int argc, char* argv[]) {
 			std::cout << time2;
 		}
 	}
+
 	//Quit SDL
 	SDL_Quit();
 
