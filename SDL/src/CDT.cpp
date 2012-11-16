@@ -2,6 +2,10 @@
 
 #include <iostream>
 #include "SDL/SDL.h"
+#include "GObject/Hero.h"
+#include "GObject/CMonster.h"
+
+using namespace std;
 
 int main(int argc, char* argv[]) {
 	try {
@@ -12,8 +16,11 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 
+	Hero* pmyHero = new Hero();
+	CMonster* pmonster1=new CMonster();
+
 	//Set up screen
-	SDL_SetVideoMode(1000, 600, 32, SDL_SWSURFACE);
+	SDL_Surface* screen= SDL_SetVideoMode(1000, 600, 32, SDL_SWSURFACE);
 	bool GAMESTATUS = true;
 
 	int time1, time2;
@@ -32,6 +39,8 @@ int main(int argc, char* argv[]) {
 			if (gameEvent.type == SDL_KEYDOWN) {
 				if (gameEvent.key.keysym.sym == SDLK_ESCAPE) {
 					GAMESTATUS = false;
+				}else{
+					pmyHero->DealInput(gameEvent.key.keysym.sym);
 				}
 			}
 		}
@@ -39,6 +48,11 @@ int main(int argc, char* argv[]) {
 		//场景逻辑
 
 		//场景绘制
+
+		pmyHero->Draw(screen);
+		pmonster1->Draw(screen);
+
+		SDL_Flip(screen);
 
 		//更新窗口
 		time2 = SDL_GetTicks();
@@ -55,3 +69,4 @@ int main(int argc, char* argv[]) {
 
 	return 0;
 }
+

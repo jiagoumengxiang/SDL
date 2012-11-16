@@ -18,11 +18,4 @@ CSprite::~CSprite() {
 	// TODO Auto-generated destructor stub
 }
 
-void CSprite::Logic(){
-
-}
-void CSprite::Draw(SDL_Surface* _screen){
-
-}
-
 } /* namespace std */

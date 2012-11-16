@@ -13,10 +13,10 @@ namespace std {
 
 class I_View {
 protected:
-	int X = 0;
-	int Y = 0;
-	int Width = 0;
-	int Height = 0;
+
+	SDL_Surface* pcharacterImg;
+	SDL_Rect pcharcterRect;
+	SDL_Rect ppositionRect;
 
 public:
 	virtual void Draw(SDL_Surface* _screen)=0;

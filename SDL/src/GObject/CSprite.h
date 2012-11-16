@@ -18,9 +18,8 @@ class CSprite: public I_Logic, public I_View {
 public:
 	CSprite();
 	virtual ~CSprite();
-	void Logic();
-	void Draw(SDL_Surface* _screen);
-
+	virtual void Logic()=0;
+	virtual void Draw(SDL_Surface* _screen)=0;
 };
 
 } /* namespace std */
