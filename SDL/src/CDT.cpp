@@ -13,7 +13,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	//Set up screen
-	SDL_SetVideoMode(1200, 800, 32, SDL_SWSURFACE);
+	SDL_SetVideoMode(1000, 600, 32, SDL_SWSURFACE);
 	bool GAMESTATUS = true;
 
 	int time1, time2;

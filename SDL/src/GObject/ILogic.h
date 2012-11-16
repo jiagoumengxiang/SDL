@@ -13,6 +13,7 @@ namespace std {
 class I_Logic {
 public:
 	virtual void Logic()=0;
+	virtual ~I_Logic(){};
 };
 
 } /* namespace std */
