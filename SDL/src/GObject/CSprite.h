@@ -14,12 +14,16 @@
 namespace std {
 
 class CSprite: public I_Logic, public I_View {
+private:
+	int sid;
 
 public:
 	CSprite();
 	virtual ~CSprite();
 	virtual void Logic()=0;
 	virtual void Draw(SDL_Surface* _screen)=0;
+	virtual int GetId();
+	virtual void SetId(int);
 };
 
 } /* namespace std */

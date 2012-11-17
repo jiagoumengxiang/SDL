@@ -10,12 +10,16 @@
 namespace std {
 
 CSprite::CSprite() {
-	// TODO Auto-generated constructor stub
-
 }
 
 CSprite::~CSprite() {
-	// TODO Auto-generated destructor stub
+}
+
+int CSprite::GetId(){
+	return sid;
+}
+void CSprite::SetId(int _id){
+	sid=_id;
 }
 
 } /* namespace std */

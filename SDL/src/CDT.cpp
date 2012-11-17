@@ -4,8 +4,13 @@
 #include "SDL/SDL.h"
 #include "GObject/Hero.h"
 #include "GObject/CMonster.h"
+#include "GObject/CSpriteStore.h"
 
 using namespace std;
+
+struct KeyStatus {
+	SDLKey val;
+};
 
 int main(int argc, char* argv[]) {
 	try {
@@ -16,11 +21,18 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 
+	//按键
+	KeyStatus keyStatus;
+
+	CSpriteStore* spriteList = new CSpriteStore();
 	Hero* pmyHero = new Hero();
-	CMonster* pmonster1=new CMonster();
+	spriteList->Add(pmyHero);
+	CMonster* pmonster1 = new CMonster();
+	spriteList->Add(pmonster1);
+
 
 	//Set up screen
-	SDL_Surface* screen= SDL_SetVideoMode(1000, 600, 32, SDL_SWSURFACE);
+	SDL_Surface* screen = SDL_SetVideoMode(1000, 600, 32, SDL_SWSURFACE);
 	bool GAMESTATUS = true;
 
 	int time1, time2;
@@ -39,18 +51,30 @@ int main(int argc, char* argv[]) {
 			if (gameEvent.type == SDL_KEYDOWN) {
 				if (gameEvent.key.keysym.sym == SDLK_ESCAPE) {
 					GAMESTATUS = false;
-				}else{
-					pmyHero->DealInput(gameEvent.key.keysym.sym);
+				} else {
+					keyStatus.val = gameEvent.key.keysym.sym;
+				}
+			} else if (gameEvent.type == SDL_KEYUP) {
+				if (keyStatus.val == gameEvent.key.keysym.sym) {
+					keyStatus.val = SDLK_CLEAR;
 				}
 			}
 		}
 
+
 		//场景逻辑
 
-		//场景绘制
+		//清空屏幕
+		SDL_FillRect(screen,NULL,0);
 
-		pmyHero->Draw(screen);
-		pmonster1->Draw(screen);
+		//精灵绘制
+		for (map<int, CSprite*>::iterator iter =
+				spriteList->GetSprites()->begin();
+				iter != spriteList->GetSprites()->end(); iter++) {
+			iter->second->Draw(screen);
+		}
+
+		pmyHero->DealInput(keyStatus.val);
 
 		SDL_Flip(screen);
 
