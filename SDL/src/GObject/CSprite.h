@@ -10,6 +10,7 @@
 
 #include "ILogic.h"
 #include "IView.h"
+#include "CGod.h"
 
 namespace std {
 
@@ -20,7 +21,7 @@ private:
 public:
 	CSprite();
 	virtual ~CSprite();
-	virtual void Logic()=0;
+	virtual void Logic(CGod* pGod)=0;
 	virtual void Draw(SDL_Surface* _screen)=0;
 	virtual int GetId();
 	virtual void SetId(int);

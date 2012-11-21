@@ -8,11 +8,13 @@
 #ifndef ILOGIC_H_
 #define ILOGIC_H_
 
+#include "CGod.h"
+
 namespace std {
 
 class I_Logic {
 public:
-	virtual void Logic()=0;
+	virtual void Logic(CGod* pGod)=0;
 	virtual ~I_Logic(){};
 };
 

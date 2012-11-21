@@ -31,6 +31,10 @@ CMonster::~CMonster() {
 void CMonster::Draw(SDL_Surface* _screen){
 	SDL_BlitSurface(this->pcharacterImg,&this->pcharcterRect,_screen,&this->ppositionRect);
 }
-void CMonster::Logic(){
+void CMonster::Logic(CGod* pGod){
+
+	//偏移量移动
+	this->ppositionRect.x+=pGod->dtX;
+	this->ppositionRect.y+=pGod->dtY;
 }
 } /* namespace STD */

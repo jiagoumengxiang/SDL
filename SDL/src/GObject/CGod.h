@@ -8,16 +8,18 @@
 #ifndef CGOD_H_
 #define CGOD_H_
 
-#include "ILogic.h"
+#include "KeyStatus.h"
 
 namespace std {
 
-class CGod : public I_Logic{
-
+class CGod{
 public:
+	int dtX;
+	int dtY;
 	CGod();
 	virtual ~CGod();
 	void Logic();
+	void DealInput(KeyStatus* pKey);
 };
 
 } /* namespace std */

@@ -11,6 +11,7 @@
 
 #include "CSprite.h"
 
+
 namespace std {
 
 class CMonster : public CSprite{
@@ -18,7 +19,7 @@ public:
 	CMonster();
 	virtual ~CMonster();
 
-	void Logic();
+	void Logic(CGod* pGod);
 	void Draw(SDL_Surface* _screen);
 };
 

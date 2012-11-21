@@ -5,12 +5,10 @@
 #include "GObject/Hero.h"
 #include "GObject/CMonster.h"
 #include "GObject/CSpriteStore.h"
+#include "GObject/KeyStatus.h"
+#include "GObject/CGod.h"
 
 using namespace std;
-
-struct KeyStatus {
-	SDLKey val;
-};
 
 int main(int argc, char* argv[]) {
 	try {
@@ -23,6 +21,9 @@ int main(int argc, char* argv[]) {
 
 	//按键
 	KeyStatus keyStatus;
+	keyStatus.mouseEvent = false;
+
+	CGod* myGod=new CGod();
 
 	CSpriteStore* spriteList = new CSpriteStore();
 	Hero* pmyHero = new Hero();
@@ -30,18 +31,19 @@ int main(int argc, char* argv[]) {
 	CMonster* pmonster1 = new CMonster();
 	spriteList->Add(pmonster1);
 
-
 	//Set up screen
 	SDL_Surface* screen = SDL_SetVideoMode(1000, 600, 32, SDL_SWSURFACE);
 	bool GAMESTATUS = true;
 
 	int time1, time2;
 
+
+	//事件处理
+	SDL_Event gameEvent;
+
 	while (GAMESTATUS) {
 		time1 = SDL_GetTicks();
 
-		//事件处理
-		SDL_Event gameEvent;
 
 		if (SDL_PollEvent(&gameEvent) != 0) {
 
@@ -59,22 +61,34 @@ int main(int argc, char* argv[]) {
 					keyStatus.val = SDLK_CLEAR;
 				}
 			}
+			if (gameEvent.type == SDL_MOUSEBUTTONDOWN) {
+				keyStatus.mouseEvent = true;
+			} else if (gameEvent.type == SDL_MOUSEBUTTONUP) {
+				keyStatus.mouseEvent = false;
+			}
+			if (gameEvent.type == SDL_MOUSEMOTION) {
+				keyStatus.x = gameEvent.motion.x;
+				keyStatus.y = gameEvent.motion.y;
+			}
 		}
 
 
-		//场景逻辑
-
 		//清空屏幕
-		SDL_FillRect(screen,NULL,0);
+		SDL_FillRect(screen, NULL, 0);
+
+		//上帝逻辑
+		myGod->Logic();
 
 		//精灵绘制
 		for (map<int, CSprite*>::iterator iter =
 				spriteList->GetSprites()->begin();
 				iter != spriteList->GetSprites()->end(); iter++) {
+			iter->second->Logic(myGod);
 			iter->second->Draw(screen);
 		}
 
-		pmyHero->DealInput(keyStatus.val);
+		pmyHero->DealInput(&keyStatus);
+		myGod->DealInput(&keyStatus);
 
 		SDL_Flip(screen);
 
