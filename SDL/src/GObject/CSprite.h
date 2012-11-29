@@ -15,8 +15,9 @@
 namespace std {
 
 class CSprite: public I_Logic, public I_View {
-private:
+protected:
 	int sid;
+	int speed;
 
 public:
 	CSprite();
